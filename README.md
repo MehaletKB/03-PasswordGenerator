@@ -9,4 +9,4 @@ Used prompt/alert to set password parameters and determine password length.
 Pushed array items based on user input into an empty array from which the password is to be generated.
 Created a for loop to generate password based on user chosen password length.
 
-![picture](./assets/Images/03-PasswordGeneratorimg.png)
+![screenshot](./assets/Images/03-PasswordGeneratorImg.png)
