@@ -12,10 +12,26 @@ var includeSymbol = false;
 
 
 
+function includeOptions() {
+  var formHtml = 
+  `<input type='checkbox' id="include-numbers">
+  <label>Include Numbers</label>
+  <input type='checkbox' id="include-uppercase">
+  <label>Include Uppercase</label>
+  <input type='checkbox' id="include-lowercase">
+  <label>Include Lowercase</label>
+  <input type='checkbox' id="include-symbol">
+  <label>Include Symbols</label>`
+  
+  var options = document.querySelector(".card-footer");
+  options.insertAdjacentHTML('beforebegin', formHtml);
+}
+includeOptions();
 
-// Write password to the #password input
-function writePassword() {
-  var passwordText = document.querySelector("#password");
+
+function generatePassword(){
+  var possibleChar = [];
+  var randomIndex = [];
   
   var numberCheckbox = document.querySelector("#include-numbers");
   includeNumbers = numberCheckbox.checked;
@@ -28,39 +44,6 @@ function writePassword() {
   
   var symbolCheckbox = document.querySelector ("#include-symbol")
   includeSymbol = symbolCheckbox.checked;
-  
-  // console.log(numberCheckbox.checked);
-  // console.log(uppercaseCheckbox.checked);
-  // console.log(lowercaseCheckbox.checked);
-  // console.log(symbolCheckbox.checked)
-  
-  var password = generatePassword();
-  passwordText.value = password;
-}
-
-
-function includeOptions() {
-  var formHtml = 
-  `<input type='checkbox' id="include-numbers">
-  <label>Include Numbers</label>
-  <input type='checkbox' id="include-uppercase">
-  <label>Include Uppercase</label>
-  <br/>
-  <input type='checkbox' id="include-lowercase">
-  <label>Include Lowercase</label>
-  <input type='checkbox' id="include-symbol">
-  <label>Include Symbols</label>`
-  
-  
-  var options = document.querySelector(".card-footer");
-  options.insertAdjacentHTML('beforebegin', formHtml);
-}
-includeOptions();
-
-
-function generatePassword(){
-  var possibleChar = [];
-  var password = "";
 
   if(includeNumbers){
     possibleChar.push(...numbersChar);
@@ -78,57 +61,35 @@ function generatePassword(){
     possibleChar.push(...symbolChar);
   }
 
-  console.log(possibleChar);
-
   if(includeNumbers || includeUppercase || includeLowercase || includeSymbol){
-    var howMany = prompt("How many characters would you like?");
+    var howMany = parseInt(prompt("How many characters would you like?"));
   }else{
     alert("Please select at least one of the options below.");
     return;
   }
   
   if (howMany < 8 || howMany > 128 || isNaN(howMany)){
-    alert("Please enter a number between 8 and 128")
+    alert("Please enter a number between 8 and 128");
+    return;
   }else{
-    alert("Please choose at least one of the")
+    var passwordLength = howMany;
   }
-  
-  
-  // return password
-  
-  
+
+  for(i = 0; i < passwordLength; i++){
+    var getChar = possibleChar[Math.floor(Math.random() * passwordLength)] ;
+    randomIndex.push(getChar);
+  }
+   console.log(randomIndex)
+  return randomIndex.join("");
+}
+
+
+
+function writePassword() {
+  var passwordText = document.querySelector("#password");
+  var password = generatePassword();
+  passwordText.value = password;
 }
 
 
 generateBtn.addEventListener("click", writePassword);
-
-
-
-
-
-
-
-
-
-
-// if(includeNumbers || includeUppercase || includeLowercase || includeSymbol){
-//   var howMany = prompt("How many characters would you like?");
-//   howMany = passwordLength;
-// }
-
-
-
-// function getRandomNumber(){
-  //   return numbersChar [Math.floor(Math.random() * numbersChar.length)];
-
-
-// function getRandomUppercase(){
-  //   return uppercaseChar [Math.floor(Math.random() * uppercaseChar.length)];
-  // }
-
-// function getRandomLowercase(){
-//   return lowercaseChar [Math.floor(Math.random() * lowercaseChar.length)];
-// }
-
-// function getRandomSymbol(){
-//   return symbolChar [Math.floor(Math.random() * symbolChar.length)]
