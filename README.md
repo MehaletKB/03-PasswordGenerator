@@ -1,6 +1,6 @@
 Password Generator
 
-We were to create an application that generates passwords while satisfying provided criteria.
+We were to create a password generator that satisfies provided criteria.
 
 Very recently, we started to cover DOM manipulation via JS. I wanted to try and use some of the tools we spoke about in order to understand them better.
 
